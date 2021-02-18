@@ -4,7 +4,8 @@
   "description": "Sample firefox addon that imports a custom section to Google Calendar's Schedule Meeting view",
   "license": "GNU GPL V3.0",
   "scripts" : {
-   "build": "webpack"
+   "build": "webpack",
+   "test": "jest"
   },
   "dependencies": {
   },
