@@ -1,3 +1,5 @@
+/******/ (() => { // webpackBootstrap
+var __webpack_exports__ = {};
 const body = document.querySelector('body');
 
 const config = {childList: true, subtree: true };
@@ -11,4 +13,5 @@ const callback = function(mutationsList, observer) {
 
 const observer = new MutationObserver(callback);
 observer.observe(body, config);
-
+/******/ })()
+;
