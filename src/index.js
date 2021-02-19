@@ -1,13 +1,11 @@
-const body = document.querySelector('body');
+import DomTreeListener from "./DomTreeListener";
+import CalendarEventViewModifier from "./CalendarViewModifier";
+import CalendarViewModifier from "./CalendarViewModifier";
 
-const config = {childList: true, subtree: true };
+const body = document.querySelector("body");
 
-const callback = function(mutationsList, observer) {
-    console.log("Dom tree changed");
-    var tabEvent = document.querySelector('#tabEvent') || document.querySelector('#tabEventDetails');
-    if(tabEvent)
-        tabEvent.style.border = "5px solid red";        
-};
-
-const observer = new MutationObserver(callback);
-observer.observe(body, config);
+if(body){
+    DomTreeListener.addListener(body, ()=> {
+        CalendarViewModifier.modifyView(body);
+    });
+}
