@@ -1,6 +1,7 @@
 import CalendarViewModifier from "./CalendarViewModifier";
 
 describe("CalendarViewModifier viewModify method", () => {    
+    
     const container = document.createElement("div");
 
     const popUpView = document.createElement("div");

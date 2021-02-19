@@ -5,6 +5,6 @@ const body = document.querySelector("body");
 
 if(body){
     DomTreeListener.addListener(body, ()=> {
-        CalendarViewModifier.editView(body);
+        new CalendarViewModifier().editView(body);
     });
 }

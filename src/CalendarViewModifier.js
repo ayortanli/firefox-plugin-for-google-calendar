@@ -1,9 +1,9 @@
 
-export default class CalendarViewModifier  {    
-    editPopupVew(containerNode) {
+export default class CalendarViewModifier {   
+    editPopupView(containerNode) {
         containerNode.style.border = "5px solid red"; 
     }
-    
+
     editFullScreenView(containerNode) {
         containerNode.style.border = "5px solid red"; 
     }
