@@ -3,13 +3,13 @@
   "version": "0.0.1",
   "description": "Sample firefox addon that imports a custom section to Google Calendar's Schedule Meeting view",
   "license": "GNU GPL V3.0",
-  "scripts" : {
-   "build": "webpack",
-   "test": "jest"
-  },
-  "dependencies": {
+  "scripts": {
+    "build": "webpack",
+    "test": "jest"
   },
   "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.12.13",
+    "jest": "^26.6.3",
     "webpack": "^5.22.0",
     "webpack-cli": "^4.5.0"
   }
