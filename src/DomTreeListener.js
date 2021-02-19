@@ -1,13 +1,23 @@
 
-const addListener = (targetNode, onTreeChanged) => {
-    const config = {childList: true, subtree: true };
+export default class DomTreeListener {
 
-    const callback = function(mutationsList, observer) {
-        onTreeChanged(targetNode);       
-    };
+    constructor(){
+        this.observer = undefined;        
+    }
 
-    const observer = new MutationObserver(callback);
-    observer.observe(targetNode, config);
+
+    addListener(targetNode, onTreeChanged) {
+        const config = {childList: true, subtree: true };
+
+        const callback = function(mutationsList, observer) {
+            onTreeChanged(targetNode);       
+        };
+
+        this.observer = new MutationObserver(callback);
+        this.observer.observe(targetNode, config);
+    }
+
+    removeListener(){
+        this.observer.disconnect();
+    }
 }
-
-export default {addListener};

@@ -4,7 +4,7 @@ import CalendarViewModifier from "./CalendarViewModifier";
 const body = document.querySelector("body");
 
 if(body){
-    DomTreeListener.addListener(body, ()=> {
+    new DomTreeListener().addListener(body, () => {
         new CalendarViewModifier().editView(body);
     });
 }
