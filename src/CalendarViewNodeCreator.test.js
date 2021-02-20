@@ -1,4 +1,4 @@
-import CalendarViewModifier from "./CalendarViewModifier";
+import CalendarViewNodeCreator from "./CalendarViewNodeCreator";
 
 describe("CalendarViewModifier viewModify method", () => {    
     
@@ -14,29 +14,34 @@ describe("CalendarViewModifier viewModify method", () => {
     modifiedView.setAttribute("id", "my-new-button"); 
 
     it("calls related modify method when popupView/fullscreenView is active in calendar and not already modified", () => {
-        let modifier = new CalendarViewModifier();        
-        modifier.editFullScreenView = jest.fn();
-        modifier.editPopupView = jest.fn();
+        let modifier = new CalendarViewNodeCreator();        
+        modifier.getMeetingNodeFromPopupView = jest.fn();
+        modifier.getMeetingNodeFromFullScreenView = jest.fn();
+        modifier.createView = jest.fn();
 
         modifier.editView(container);  //nothing to edit
-        expect(modifier.editFullScreenView.mock.calls.length).toBe(0);
-        expect(modifier.editPopupView.mock.calls.length).toBe(0);        
+        expect(modifier.getMeetingNodeFromFullScreenView.mock.calls.length).toBe(0);
+        expect(modifier.getMeetingNodeFromPopupView.mock.calls.length).toBe(0);        
 
         container.appendChild(modifiedView);
         modifier.editView(container);  //already modified so nothing to edit
-        expect(modifier.editFullScreenView.mock.calls.length).toBe(0);
-        expect(modifier.editPopupView.mock.calls.length).toBe(0);
+        expect(modifier.getMeetingNodeFromFullScreenView.mock.calls.length).toBe(0);
+        expect(modifier.getMeetingNodeFromPopupView.mock.calls.length).toBe(0);
         
         container.removeChild(modifiedView);
         container.appendChild(popUpView);
         modifier.editView(container);  //call popupView Node Finder
-        expect(modifier.editFullScreenView.mock.calls.length).toBe(0);
-        expect(modifier.editPopupView.mock.calls.length).toBe(1);
+        expect(modifier.getMeetingNodeFromFullScreenView.mock.calls.length).toBe(0);
+        expect(modifier.getMeetingNodeFromPopupView.mock.calls.length).toBe(1);
 
         container.removeChild(popUpView);
         container.appendChild(fullScreenView);
         modifier.editView(container);  //call fullscreenView Node Finder
-        expect(modifier.editFullScreenView.mock.calls.length).toBe(1);
-        expect(modifier.editPopupView.mock.calls.length).toBe(1);
+        expect(modifier.getMeetingNodeFromFullScreenView.mock.calls.length).toBe(1);
+        expect(modifier.getMeetingNodeFromPopupView.mock.calls.length).toBe(1);
     });
+
+    //TODO: getMeetingNodeFromPopupView test
+
+    //TODO: getMeetingNodeFromFullScreenView test
 });

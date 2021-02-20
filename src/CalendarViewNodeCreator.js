@@ -11,43 +11,45 @@ export default class CalendarViewModifier {
      *          --SchedularNode
      *          --TimeNode
      *          --AttendeeNode
-     *          --MeetingNode (with attribute 'data-is-meet-selected')
+     *          --MeetingConferenceNode (with attribute 'data-is-meet-selected')
      *          --LocationNode
      */
-    editPopupView(containerNode) {
+    getMeetingNodeFromPopupView(containerNode) {
         containerNode = containerNode.firstChild;//unnecessary
         var meetingNode = containerNode.querySelector("[data-is-meet-selected]");
-        var newNode = meetingNode.cloneNode(true);
-        newNode.setAttribute("id", this.newComponentId);
-        meetingNode.after(newNode);
-        //bunun icini temizle ve bir id ver.// Bu id'li eleman varsa hiç girme çizim işine
-        //sonra bunu toplantıdan sonraya merge et.
-        newNode.style.border = "5px solid red"; 
+        return meetingNode;
     }
 
     /**
      * --ContainerNode
-     *      --MeetingNode (doesn't have an indikator attribure :( )
+     *      --MeetingConferenceNode (doesn't have an indikator attribure :( )
      *      --LocationNode
      *      --NotificationNode
      */
-    editFullScreenView(containerNode) {
+    getMeetingNodeFromFullScreenView(containerNode) {
         var meetingNode = containerNode.firstChild;
-        var newNode = meetingNode.cloneNode(true);
-        newNode.setAttribute("id", this.newComponentId);
-        meetingNode.after(newNode);
-                
-        newNode.style.border = "5px solid red"; 
+        return meetingNode;
     }
 
     editView(node) {
         if(node.querySelector(`#${this.newComponentId}`)) //if inserted already
             return
         var container = node.querySelector("#tabEvent") || node.querySelector("#tabEventDetails");
-        if(container)
+        if(container) {
+            let meetingNode = undefined;
             if(container.getAttribute("id")==="tabEvent")
-                this.editPopupView(container);
+                meetingNode = this.getMeetingNodeFromPopupView(container);
             else
-                this.editFullScreenView(container);
+                meetingNode = this.getMeetingNodeFromFullScreenView(container);
+            this.createView(meetingNode);
+        }
+    }
+
+    createView(meetingNode){
+        //TODO:refactor to a new class...
+        var newNode = meetingNode.cloneNode(true);
+        newNode.setAttribute("id", this.newComponentId);
+        meetingNode.after(newNode);                
+        newNode.style.border = "5px solid red";
     }
 }

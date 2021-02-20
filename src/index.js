@@ -1,10 +1,10 @@
 import DomTreeListener from "./DomTreeListener";
-import CalendarViewModifier from "./CalendarViewModifier";
+import CalendarViewNodeCreator from "./CalendarViewNodeCreator";
 
 const body = document.querySelector("body");
 
 if(body){
     new DomTreeListener().addListener(body, () => {
-        new CalendarViewModifier().editView(body);
+        new CalendarViewNodeCreator().editView(body);
     });
 }
