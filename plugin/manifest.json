@@ -1,12 +1,12 @@
 {
   "manifest_version": 2,
-  "name": "meetical",
+  "name": "firefox-google-calendar-addon",
   "version": "1.0",
 
   "description": "Adds a custom section to Google Calendar's Schedule Meeting view",
 
   "icons": {
-	"48": "icons/meetical-48.png"
+	  "48": "icons/sample_icon-48.png"
   },
 
   "content_scripts": [
