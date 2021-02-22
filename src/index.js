@@ -5,6 +5,8 @@ const body = document.querySelector("body");
 
 if(body){
     new DomTreeListener().addListener(body, () => {
-        new CalendarViewNodeCreator().editView(body);
+        let newNode = new CalendarViewNodeCreator().createNode(body);  
+        if(newNode)       
+            newNode.style.border = "5px solid red";
     });
 }

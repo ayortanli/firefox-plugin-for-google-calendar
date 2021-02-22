@@ -1,55 +1,50 @@
 
-export default class CalendarViewModifier {   
+export default class CalendarViewNodeCreator {   
 
     constructor(){
         this.newComponentId = "my-new-button";
     }
 
     /**
-     * --ContainerNode
+     * --ContainerNode (in PopupView)
      *      --FirstChild
      *          --SchedularNode
      *          --TimeNode
      *          --AttendeeNode
      *          --MeetingConferenceNode (with attribute 'data-is-meet-selected')
      *          --LocationNode
-     */
-    getMeetingNodeFromPopupView(containerNode) {
-        containerNode = containerNode.firstChild;//unnecessary
-        var meetingNode = containerNode.querySelector("[data-is-meet-selected]");
-        return meetingNode;
-    }
-
-    /**
-     * --ContainerNode
+     * 
+     * --ContainerNode (in Fullscreen View)
      *      --MeetingConferenceNode (doesn't have an indikator attribure :( )
      *      --LocationNode
      *      --NotificationNode
      */
-    getMeetingNodeFromFullScreenView(containerNode) {
-        var meetingNode = containerNode.firstChild;
+    _getMeetingConferenceNode(containerNode){
+        let meetingNode = null;
+        if(containerNode.getAttribute("id")==="tabEvent") { //popupView
+            containerNode = containerNode.firstChild;//unnecessary
+            meetingNode = containerNode.querySelector("[data-is-meet-selected]");
+        }
+        else
+            meetingNode = containerNode.firstChild;
         return meetingNode;
     }
 
-    editView(node) {
+    createNode(node) {
         if(node.querySelector(`#${this.newComponentId}`)) //if inserted already
-            return
+            return null;
         var container = node.querySelector("#tabEvent") || node.querySelector("#tabEventDetails");
         if(container) {
-            let meetingNode = undefined;
-            if(container.getAttribute("id")==="tabEvent")
-                meetingNode = this.getMeetingNodeFromPopupView(container);
-            else
-                meetingNode = this.getMeetingNodeFromFullScreenView(container);
-            this.createView(meetingNode);
+            let meetingNode = this._getMeetingConferenceNode(container);            
+            return this._createAndAppendNewNode(meetingNode);
         }
+        return null;
     }
 
-    createView(meetingNode){
-        //TODO:refactor to a new class...
+    _createAndAppendNewNode(meetingNode){
         var newNode = meetingNode.cloneNode(true);
         newNode.setAttribute("id", this.newComponentId);
-        meetingNode.after(newNode);                
-        newNode.style.border = "5px solid red";
+        meetingNode.after(newNode);               
+        return newNode;
     }
 }
