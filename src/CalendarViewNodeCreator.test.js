@@ -10,7 +10,7 @@ describe("CalendarViewModifier", () => {
         expect(result).toBeNull();
         
         let createdNode = document.createElement("div");
-        createdNode.setAttribute("id", "my-new-button"); 
+        createdNode.setAttribute("id", "my-new-component"); 
         container.appendChild(createdNode);
         viewNodeCreator.createNode(container);  //already modified so nothing to edit
         expect(result).toBeNull();
@@ -33,7 +33,7 @@ describe("CalendarViewModifier", () => {
         //creates node 
         expect(newNode.getAttribute("data-is-meet-selected")).toBe("true");
         expect(newNode.getAttribute("popup-meeting")).toBe("true");
-        expect(newNode.getAttribute("id")).toBe("my-new-button");   
+        expect(newNode.getAttribute("id")).toBe("my-new-component");   
 
         //appends new node to cloned node as sibling        
         expect(popUpView.firstChild.childNodes.length).toBe(2);                
@@ -55,7 +55,7 @@ describe("CalendarViewModifier", () => {
         
         //creates node 
         expect(newNode.getAttribute("fullscreen-meeting")).toBe("true");
-        expect(newNode.getAttribute("id")).toBe("my-new-button");   
+        expect(newNode.getAttribute("id")).toBe("my-new-component");   
 
         //appends new node to cloned node as sibling        
         expect(fullScreenView.childNodes.length).toBe(2);                

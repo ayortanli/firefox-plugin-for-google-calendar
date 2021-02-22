@@ -2,7 +2,7 @@
 export default class CalendarViewNodeCreator {   
 
     constructor(){
-        this.newComponentId = "my-new-button";
+        this.newComponentId = "my-new-component";
     }
 
     /**
