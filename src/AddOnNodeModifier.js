@@ -1,19 +1,13 @@
 export default class AddOnNodeModifier {
 
-    constructor(addonNode) {
-        this.addonNode = addonNode;
-    }
-
-    setImage() {
-        let image = this.addonNode.querySelector("img");
+    _setImage(addonNode) {
+        let image = addonNode.querySelector("img");
         image.setAttribute("id", "my-new-image");
         image.setAttribute("src", "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Firefox_Logo%2C_2017.png/64px-Firefox_Logo%2C_2017.png");       
     }
 
-    setButton() {        
-        console.log("button creating1");
-
-        let button = this.addonNode.querySelector("[role=button]");
+    _setButton(addonNode) {        
+        let button = addonNode.querySelector("[role=button]");
         button.setAttribute("id", "my-new-button");
 
         let buttonNameNode = button.lastChild.firstChild;
@@ -24,14 +18,14 @@ export default class AddOnNodeModifier {
         });
     }
 
-    draw(){
-        this.addonNode.style.border = "1px solid red";
-        this.cleanGoogleAttribute(this.addonNode);
-        this.setImage();
-        this.setButton();
+    setAddOnContent(addonNode){
+        addonNode.style.border = "1px solid red";
+        this._cleanGoogleAttribute(addonNode);
+        this._setImage(addonNode);
+        this._setButton(addonNode);
     }
 
-    cleanGoogleAttribute(node){
+    _cleanGoogleAttribute(node){
         if(node && node instanceof HTMLElement){
             if(node.getAttribute("jsname"))
                 node.removeAttribute("jsname");                
@@ -42,7 +36,7 @@ export default class AddOnNodeModifier {
             if(node.getAttribute("id") && !node.getAttribute("id").startsWith("my-new")) //my-new-component already added
                 node.setAttribute("id", `my-new-${node.getAttribute("id")}`);                            
             for(const child of node.childNodes)
-                this.cleanGoogleAttribute(child);
+                this._cleanGoogleAttribute(child);
         }
     }
 }

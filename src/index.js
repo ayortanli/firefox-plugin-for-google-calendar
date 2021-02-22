@@ -8,8 +8,8 @@ if(body){
     new DomTreeListener().addListener(body, () => {
         let newNode = new CalendarViewNodeCreator().createNode(body);  
         if(newNode) { 
-            let addonModifier = new AddOnNodeModifier(newNode);
-            addonModifier.setAddonContent();
+            let addonModifier = new AddOnNodeModifier();
+            addonModifier.setAddOnContent(newNode);
         }
     });
 }
